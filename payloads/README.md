@@ -4,12 +4,13 @@ This Python3 script automates the testing of XSS (Cross-Site Scripting) vulnerab
 
 # How to use the script
 
-Clone the repository to your local machine
-Save the script as a .py file (for example, xss_vulnerability_test.py)
-Open a terminal or command prompt and navigate to the directory where the script is saved
-Run the script by entering python3 xss_vulnerability_test.py
-When prompted, enter the URL of the target page you want to test.
-How the script works
+1. Clone the repository to your local machine
+2. Save the script as a .py file (for example, ***xss_vulnerability_test.py***)
+3. Open a terminal or command prompt and navigate to the directory where the script is saved
+4. Run the script by entering ***python3 xss_vulnerability_test.py***
+5. When prompted, enter the URL of the target page you want to test.
+
+# How the script works
 The script uses the requests library to send a GET request to the target URL with each of the payloads defined in the payloads list. If the response text contains the string "alert", the script assumes that the payload has been executed and that there is an XSS vulnerability present in the target URL.
 
 # Important notes
