@@ -3,12 +3,14 @@ import openpyxl
 import os
 
 def xlsx_to_csv(file):
+    i = 0
     # carrega o arquivo .xlsx como workbook
     workbook = openpyxl.load_workbook(file)
 
     # para cada planilha, salva como um arquivo .csv separado
     for sheet in workbook:
-        sheet_name = sheet.title
+        i += 1
+        sheet_name = sheet.title + i
         csv_file = f"{sheet_name}.csv"
 
         with open(csv_file, 'w', newline='') as f:
