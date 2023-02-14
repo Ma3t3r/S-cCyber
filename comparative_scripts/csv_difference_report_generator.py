@@ -1,3 +1,5 @@
+import csv
+
 def compare_csv(file1, file2):
     # read the data from the first file
     with open(file1, 'r') as f:
