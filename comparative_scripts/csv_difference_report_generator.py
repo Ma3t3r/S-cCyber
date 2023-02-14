@@ -1,6 +1,34 @@
 import csv
+import openpyxl
+import os
+
+def xlsx_to_csv(file):
+    # carrega o arquivo .xlsx como workbook
+    workbook = openpyxl.load_workbook(file)
+
+    # para cada planilha, salva como um arquivo .csv separado
+    for sheet in workbook:
+        sheet_name = sheet.title
+        csv_file = f"{sheet_name}.csv"
+
+        with open(csv_file, 'w', newline='') as f:
+            csv_writer = csv.writer(f)
+
+            for row in sheet.iter_rows():
+                row_values = [cell.value for cell in row]
+                csv_writer.writerow(row_values)
+
+        # retorna o nome do arquivo .csv convertido
+        print(csv_file)
+        return csv_file
 
 def compare_csv(file1, file2):
+    # verifica se algum dos arquivos é .xlsx e, se for, o converte para .csv
+    if file1.endswith('.xlsx'):
+        file1 = xlsx_to_csv(file1)
+    if file2.endswith('.xlsx'):
+        file2 = xlsx_to_csv(file2)
+    
     # read the data from the first file
     with open(file1, 'r') as f:
         reader1 = csv.DictReader(f)
@@ -30,6 +58,8 @@ def compare_csv(file1, file2):
             writer.writerow(row)
 
     # print the number of differences found
+    count1 = sum(1 for row in data1 if row.get("IP Address"))
+    count2 = sum(1 for row in data2 if row.get("IP Address"))
     print(f"Found {len(differences)} differences between the files {file1} and {file2}.")
 
 # prompt the user to enter the names of the two files to compare
