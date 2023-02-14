@@ -10,7 +10,7 @@ def xlsx_to_csv(file):
     # para cada planilha, salva como um arquivo .csv separado
     for sheet in workbook:
         i += 1
-        sheet_name = sheet.title + i
+        sheet_name = sheet.title + str(i)
         csv_file = f"{sheet_name}.csv"
 
         with open(csv_file, 'w', newline='') as f:
