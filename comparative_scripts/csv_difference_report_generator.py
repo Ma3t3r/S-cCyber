@@ -63,9 +63,13 @@ def compare_csv(file1, file2):
             writer.writerow(row)
 
     # print the number of differences found
+    print(f"Found {len(differences)} differences between the files {file1} and {file2}.")
+    
+     # count the number of values in the "IP Address" column of both files
     count1 = sum(1 for row in data1 if row.get("IP Address"))
     count2 = sum(1 for row in data2 if row.get("IP Address"))
-    print(f"Found {len(differences)} differences between the files {file1} and {file2}.")
+    print(f"File {file1} has {count1} values in the 'IP Address' column.")
+    print(f"File {file2} has {count2} values in the 'IP Address' column.")
 
 # prompt the user to enter the names of the two files to compare
 file1 = input("Enter the name of the first file: ")
