@@ -33,60 +33,49 @@ def compare_csv(file1, file2):
         file1 = xlsx_to_csv(file1)
     if file2.endswith('.xlsx'):
         file2 = xlsx_to_csv(file2)
-
-    # lê os dados do primeiro arquivo
+    
+    # read the data from the first file
     with open(file1, 'r') as f:
         reader1 = csv.DictReader(f)
         data1 = [row for row in reader1]
 
-    # lê os dados do segundo arquivo
+    # read the data from the second file
     with open(file2, 'r') as f:
         reader2 = csv.DictReader(f)
         data2 = [row for row in reader2]
 
-    # encontra as diferenças entre os dois arquivos
+    # find the differences between the two files
     differences = []
+    common_hostnames = []
     for row1 in data1:
         found = False
         for row2 in data2:
             if row1 == row2:
                 found = True
+                common_hostnames.append(row1['Hostname'])
                 break
         if not found:
             differences.append(row1)
 
-    # adiciona marcação nos campos diferentes e contagem na coluna Hostname
-    count_diff = 0
-    for row in differences:
-        row_str1 = str([val for val in row.values()])
-        for row2 in data2:
-            row_str2 = str([val for val in row2.values()])
-            if row_str1 == row_str2:
-                for key, val in row.items():
-                    if row2[key] != val:
-                        row[key] = f"***{val}***"
-                if row2['Hostname'] != row['Hostname']:
-                    row['Hostname'] = f"***{row['Hostname']} ({row2['Hostname']})***"
-                count_diff += 1
-
-    # escreve as diferenças em um novo arquivo "differences.csv"
+    # write the differences to a new file "differences.csv"
     with open("differences.csv", 'w', newline='') as f:
         writer = csv.DictWriter(f, fieldnames=reader1.fieldnames)
         writer.writeheader()
         for row in differences:
             writer.writerow(row)
 
-    # imprime o número de diferenças encontradas
-    print(f"Found {count_diff} differences between the files {file1} and {file2}.")
+    # print the number of differences found
+    print(f"Found {len(differences)} differences between the files {file1} and {file2}.")
 
-    # conta o número de valores na coluna "Hostname" de ambos os arquivos
+    # count the number of values in the "Hostname" column of both files
     count1 = sum(1 for row in data1 if row.get("Hostname"))
     count2 = sum(1 for row in data2 if row.get("Hostname"))
     print(f"File {file1} has {count1} values in the 'Hostname' column.")
     print(f"File {file2} has {count2} values in the 'Hostname' column.")
 
-    # print the number of differences found
-    print(f"Found {len(differences)} differences between the files {file1} and {file2}.")
+    # print the number of common hostnames
+    common_count = len(common_hostnames)
+    print(f"There are {common_count} common Hostnames between the files {file1} and {file2}.")
     
      # count the number of values in the "IP Address" column of both files
     count1 = sum(1 for row in data1 if row.get("IP Address"))
