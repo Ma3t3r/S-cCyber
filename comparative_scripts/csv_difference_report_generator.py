@@ -2,8 +2,9 @@ import csv
 import openpyxl
 import os
 
+i = 0
+
 def xlsx_to_csv(file):
-    i = 0
     # carrega o arquivo .xlsx como workbook
     workbook = openpyxl.load_workbook(file)
 
