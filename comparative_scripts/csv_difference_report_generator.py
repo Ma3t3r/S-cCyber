@@ -64,7 +64,20 @@ def compare_csv(file1, file2):
     count2 = sum(1 for row in data2 if row.get("IP Address"))
     print(f"File {file1} has {count1} values in the 'IP Address' column.")
     print(f"File {file2} has {count2} values in the 'IP Address' column.")
+    
+    # create the "All Hosts.csv" file
+    with open('All Hosts.csv', 'w') as f:
+        writer = csv.DictWriter(f, fieldnames=reader1.fieldnames)
+        writer.writeheader()
 
-file1 = 'file1.xlsx'
-file2 = 'file2.csv'
+        # write all the rows from both files to the "All Hosts.csv" file
+        for row in data1 + data2:
+            writer.writerow(row)
+
+# prompt the user to enter the names of the two files to compare
+file1 = input("Enter the name of the first file: ")
+file2 = input("Enter the name of the second file: ")
+
+# compare the two files and create the "All Hosts.csv" file
 compare_csv(file1, file2)
+
